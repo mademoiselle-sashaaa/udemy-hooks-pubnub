@@ -1,9 +1,10 @@
 import React from 'react';
+import MessageReactions from './MessageReactions';
 import CreateReaction from './CreateReation';
 import { useAppContext } from './hooks'
 
 function MessageBoard() {
-    const { state: { messages } } = useAppContext();
+    const { state: { messages, reactionsMap } } = useAppContext();
     return (
         <div>
             {messages.map(item => {
@@ -13,7 +14,8 @@ function MessageBoard() {
                         <h4>{new Date(timestamp).toLocaleString()}</h4>
                         <p>{text}</p>
                         <p>- {username}</p>
-                        <CreateReaction />
+                        <CreateReaction messageId={id} />
+                        <MessageReactions messageReactions={reactionsMap[id]} />
                         <hr />
                     </div>
                 )
